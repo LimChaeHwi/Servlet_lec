@@ -20,16 +20,17 @@ public class BookDAO {
 		try{
 			BookDAO dao = new BookDAO();
 			con = dao.getConnection();
+			//ì‹œí€€ìŠ¤ ì‚¬ìš©í•´ì„œ bookno ì…ë ¥ create sequence book_ seq increment by 1 start with 100;
 			pstmt = con.prepareStatement("insert into book values(book_seq.nextval,?,?,?)");
-			// ?¿¡ ¼ø¼­´ë·Î °ªÀ» ´ëÀÔ.
+			// ?ì— ìˆœì„œëŒ€ë¡œ ê°’ì„ ëŒ€ì….
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getAuthor());
 			pstmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
 			
 			pstmt.executeUpdate();
-			// DB¿¡ ÀÔ·ÂÀÌ ¿Ï·á µÇ¾ú´ÂÁö È®ÀÎ.
-			System.out.println("µµ¼­ µî·Ï ¿Ï·á");
-			System.out.println("µµ¼­ µî·Ï Á¤º¸");
+			// DBì— ì…ë ¥ì´ ì™„ë£Œ ë˜ì—ˆëŠ”ì§€ í™•ì¸.
+			System.out.println("ë„ì„œ ë“±ë¡ ì™„ë£Œ");
+			System.out.println("ë„ì„œ ë“±ë¡ ì •ë³´");
 			System.out.println("bookno : "+vo.getBookno());
 			System.out.println("title : "+vo.getTitle());
 			System.out.println("author : "+vo.getAuthor());
@@ -56,8 +57,8 @@ public class BookDAO {
 			
 			pstmt.setString(1, title);
 			rs = pstmt.executeQuery();
-			System.out.println("µµ¼­ ¸ñ·Ï º¸±â");
-			System.out.println("µµ¼­ Á¤º¸");
+			System.out.println("ë„ì„œ ëª©ë¡ ë³´ê¸°");
+			System.out.println("ë„ì„œ ì •ë³´");
 			
 			if(rs==null){
 				return null;
