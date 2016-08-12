@@ -1,7 +1,7 @@
 package edu;
 
 import java.sql.Timestamp;
-
+//create table book ( bookno number(10), title varchar2(10), author varchar2(10), pubdate date);
 public class BookVO {
 	private int bookno;
 	private String title;
