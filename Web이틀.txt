@@ -1,0 +1,54 @@
+RequestDispatcher
+
+다른페이지로 이동
+forward ()
+include ()
+
+WebServer = Http = stateless(연결이 바로 끊김)
+네트워크가 계속 유지되지 않음.
+
+이전에 쓴 데이터를 다른 페이지에서도 사용하고 싶다면.
+
+계속 유지 시킬수 있는 저장 공간 3 only
+1.ServletContext
+2.HttpSession
+3.HttpServletRequest
+
+메모리 존재 기간이 다름.
+
+HttpServletRequest 
+- client가 서비스를 요청했을 때 (생성) service실행 전에
+- client에게 응답했을 때 (삭제)
+- request 단위
+
+HttpSession : 장바구니, 로그인/로그아웃
+- client 최초 접속 시
+- client 접속 종료시
+- client 단위
+
+ServletContext
+- context(web application) 서비스 시작 시, 서버 시작시
+- context 서비스 종료시, 서버 중지 시
+- context 단위
+
+사용 범위(scope)?
+
+저장 : setAttribute(name, value)
+추출 : getAttribute(name)
+
+Client 단위로 정보를 유지하는 기술
+
+Cookie
+-client
+-text (저장 가능한 데이터 형태)
+-size 제한 있음
+-첫째줄 cookie name, 둘째줄 cookie value
+-셋째줄부터 브라우저에서 지정
+-cookie name은 영문자,숫자,특수문자
+-cookie는 보안에 매우 약함.
+
+HttpSession
+-server
+-object (저장 가능한 데이터 형태)
+-서버에서 허용하는 용량만큼
+
