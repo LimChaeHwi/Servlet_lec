@@ -1,0 +1,79 @@
+(Exam14~)
+ServletContext
+- 서버 시작시 web application당 하나씩 생성
+-서버 중지 시 삭제
+-주소값 추출
+ServletConfig getServletContext()
+HttpServlet getServletContext()
+동인한 웹 어플리케이션에 모든 페이지는 동일한 ServletContext
+객체를 사용함.
+-기능 
+서버 정보 추출
+웹 어플리케이션 단위로 데이타 공유
+저장:setAttribute(name,value)
+추출:getAttribute(name)
+
+클라이언트 단위로 데이타 공유
+
+Cookie
+-client 
+-text(name: value)
+
+//쿠키 저장
+Cookie c = new Cookie(name,value);
+c.setMaxAge(초) //쿠키의 유요시간 설정
+res.addCookie(c) //쿠키 전송
+
+//쿠키 추출
+Cookie[] list = req.getCookie();
+list[i].getName();//쿠키 이름 추출
+list[i].getValue();//쿠키 값 추출
+
+HttpSession
+server에 저장해서 유지 시킴.
+object
+client 접속시
+client 접속을 종료했을때 삭제
+
+여러개의 세션이 존재할때 각각의 session id가 부여됨.
+브라우저가 종료될 때 session id가 삭제
+
+HttpServletRequest(interface)
+getSession()
+getSession(true) 
+->HttpSession이 존재하지 않으면 새로 생성하여 리턴
+------------------------
+getSession(false)  
+->HttpSession이 존재하지 않으면 null값 리턴
+
+getSession()메소드를 실행해야지 HttpSession객체가 생성된다.
+
+HttpSession session = req.getSession() 이후
+*setAttribute(name,value)
+*getAttribute(name)
+*invalidate()
+*removeAttribute(name)
+*serMaxInactiveInterval(time)
+
+로그인 작업
+1. ID, 비밀번호 추출
+2. 유효성 체크(pattern, data type)
+false => input page이동
+3. DB와 비교
+false => input page이동
+4. 로그인 처리
+   1) 현재 로그인 상태 여부 판단 => getAttribute(name)
+   2) 로그인 처리
+      HttpSession setAttribute(name,value)
+
+로그 아웃 작업
+1. 로그인 상태 여부 판단 =>
+2. 로그 아웃 처리
+   HttpSession removeAttribute(name) 세션 속성 삭제
+   HttpSession invalidate()          세션 삭제
+
+JSP
+Servlet = JSP
+             |----JSP Container---|
+client -> *.jsp -> *.java -> *.class -> S.C ->
+              변환       컴파일
