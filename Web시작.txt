@@ -1,0 +1,110 @@
+ Server  <=====>  Client
+WebServer        WebBrowser
+(Http Server, 요청에 대한 응답)
+Servlet(Servlet container,서블릿페이지 실행), Jsp(JSP container,jsp페이지 실행)
+
+network
+web = Http
+
+SE 프로젝트는 main 으로 실행 하는 방식(stand alone, 독자적 실행)
+EE 프로젝트는 
+
+WAS 제품
+(webserver, servletcontainer, jspcontainer)
+web logic(oracle,상용)
+제우스(티맥소프트,상용)
+Tomcat(open source)
+JBoss(open source)
+
+★설치하는 JVM 버젼은 WAS 제품에 맞는 버젼에 맞춰야한다.
+
+1. JDK설치
+2. WAS설치
+    tomcat
+3. 서블릿 작성
+   1) HttpServlet 상속
+   2)기본생성자
+   3) 매서드 오버라이딩
+GenericServlet - init()
+HttpServlet - service()
+
+ callback메서드
+이벤트가 발생하면 자동으로 호출되는 메서드(init, service)
+
+데이터 관리 방식
+
+1.DBMS
+DB단위로 관리(table, view 등)
+
+2.WebServer
+web application단위로 관리(servlet, jsp 등)
+
+*요청을 받은 서블릿 컨테이너가 실행을할 때 가장 먼저 체크하는 것은 처음으로 들어온 요청인지
+이전에 들어왔던 요청인지 체크함.
+ 최초 요청이면 메모리 로딩 ->객체 생성->init()->service()
+ 최초 요청이 아니면 service()
+init()메소드에서는 초기화 작업을 한다. 서블릿 객체는 서버에 한번만 생성됨
+service() 에서는 실제 내용 구현.
+destroy() 서블릿 객체가 삭제시 실행 = 서버 종료 시
+
+
+서블릿 객체는 서블릿 컨테이너가 생성
+
+*서블릿 디렉토리(클라이언트로부터 서블릿요청이 들어오면 서블릿 컨테이너는
+ 요청된 파일을 이 디렉토리에서만 찾을 수 있다.)
+ /WEB-INF/classes : *.class
+         /lib     : *.jar
+*WEB-INF 는 클라이언트가 접근하지 못하도록 막혀있다.
+ 위 사실이 상충이 된다.
+해결책은 중간에 매개체를 만들어준다. @WebServlet
+
+
+서블릿 2.5
+서블릿 3.0
+
+웹서버가 시작이 될 때 web.xml 실행. webapps -> WEB-INF -> web.xml(웹앱 환경 설정 파일)
+
+클라이언트 <=요청/응답정보=> 웹서버 -> 서블릿컨테이너 -> 메모리 로딩 ->객체 생성->init()->service()
+
+HTTP 메시지
+요청 메시지
+-----------------------------------------
+1. 요청방식 get/post
+2. URI(포트번호 다음 서버의 정보) 
+	ex) localhost:9090/★edu/first★
+3. HTTP 버전 정보
+-----------------------------------------
+ Header
+name:value
+-----------------------------------------
+ Body
+
+-----------------------------------------
+
+응답 메시지(service메소드가 종료될때)
+-----------------------------------------
+응답코드(=상태코드) 200(success)
+1. 요청방식 get/post
+2. URI(포트번호 다음 서버의 정보) 
+	ex) localhost:9090/★edu/first★
+3. HTTP 버전 정보
+-----------------------------------------
+ Header
+name:value
+-----------------------------------------
+ Body
+Header에 있는 값의 상세 내용
+-----------------------------------------
+
+문자코드 8859_1(기본값)
+euc-kr utf-8
+2Byte  3Byte
+한/영  모든언어
+
+Query 문자열
+1. name = value & name = value
+2. 문자, 숫자, 특수문자
+3. 2번을 제외한 문자는 %와 함께 16진수로변환하여 전달
+4. 공백은 +로 연결되서 전달
+
+doGet, doPost <--service 메서드안에서 실행
