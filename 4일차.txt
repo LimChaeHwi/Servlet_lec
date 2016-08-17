@@ -2,9 +2,12 @@
 
 MVC 디자인 패턴
 
-M : model (Biz, DAO)<=POJO(play old java object)
+M : model (Biz=service, DAO)<=POJO(play old java object)
 V : view 
 C : controller
+
+POJO - 상속을 받지 않는 자바 클래스
+호환성이 좋음.
 
 member.html -> MemberServlet 
 ->MemberBiz->MemberDAO->DB
@@ -19,6 +22,16 @@ Controller(Servlet,JSP)
 4.Biz 메서드 호출
 5.output view 페이지로 이동한다.
 
+Biz= Service : 서비스처리기능 구현=POJO
+
+DAO=DB에 관련된 기능 구현 = POJO 
+
+3-Tier 아키텍쳐
+
+View -> Controller -> Biz -> DAO
+   presentation       Biz   persistent
+
+DTO(Data Transform Object) = VO
 
 서블릿 - 웹상에서 요청에 대한 처리를
 해주는 자바 프로그램.
